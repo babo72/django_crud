@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                echo "Building..${env.BUILD_ID} on ${env.BUILD_URL}"
+                echo "Building..${env.BUILD_ID} on ${env.BUILD_URL}, ${env.WORKSPACE}"
                 git (
                     url: 'https://github.com/babo72/django_crud.git',
                     branch: 'master',
