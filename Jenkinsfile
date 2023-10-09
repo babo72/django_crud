@@ -25,8 +25,7 @@ pipeline {
                     scannerHome = tool 'Sonar-Scanner'
                 }
                 withSonarQubeEnv('SonarCloud-babo72'){
-                    //sh "${scannerHome}/bin/sonar-scanner -Dsonar.organization=babo72 -Dsonar.projectKey=babo72_github-django-example -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=0b487c792ca10ab464af4854b119373c88f894cb"
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.organization=babo72 -Dsonar.projectKey=babo72_github-django-example -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=0b487c792ca10ab464af4854b119373c88f894cb"
                 }
             }
         }
