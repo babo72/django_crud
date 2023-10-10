@@ -56,7 +56,7 @@ pipeline {
         stage('docker packaging') {
             steps {
                 echo 'docker packaging...'
-                sh 'docker build --version'
+                sh 'docker build --help'
             }
         }
     }
