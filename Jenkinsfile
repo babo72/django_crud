@@ -14,6 +14,11 @@ pipeline {
                 )
             }
         }
+        stage('install Python package') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
         stage('Test') {
             steps {
                 echo "Testing..${env.BUILD_ID} on ${env.BUILD_URL}"
