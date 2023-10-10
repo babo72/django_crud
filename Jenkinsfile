@@ -20,11 +20,11 @@ pipeline {
                 sh 'pip3 install -r requirements.txt'
                 
                 dir('apps') {
-                    echo 'run books_cbv test...'
-                    sh 'python3 manage.py test books_cbv'
+                    echo 'run test code...'
+                    sh 'python3 manage.py test'
                     
-                    //echo 'run coverage & report...'
-                    
+                    echo 'run coverage & report...'
+                    sh "python3 -m coverage run --source='.' manage.py test"
                 }
             }
         }
