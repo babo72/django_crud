@@ -27,6 +27,8 @@ pipeline {
                     // coverage 설치는 requirements.txt 로 옮겨
                     sh 'python3 -m pip install coverage'
                     sh "python3 -m coverage run --source='.' manage.py test"
+                    // view coverage result
+                    sh 'python3 -m coverage report'
                 }
             }
         }
