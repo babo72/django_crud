@@ -29,6 +29,8 @@ pipeline {
                     sh "python3 -m coverage run --source='.' manage.py test"
                     // view coverage result
                     sh 'python3 -m coverage report'
+                    // generage coverage.xml report
+                    sh 'python3 -m coverage xml'
                 }
             }
         }
