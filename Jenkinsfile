@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                echo "Building..${env.BUILD_ID} on ${env.BUILD_URL}, ${env.WORKSPACE}"
+                echo "SCM...${env.BUILD_ID} on ${env.BUILD_URL}, ${env.WORKSPACE}"
                 git (
                     url: 'https://github.com/babo72/django_crud.git',
                     branch: 'master',
@@ -14,7 +14,7 @@ pipeline {
                 )
             }
         }
-        stage('install Python package') {
+        stage('py test') {
             steps {
                 echo 'install required packages...'
                 sh 'pip3 install -r requirements.txt'
@@ -32,11 +32,6 @@ pipeline {
                     // generage coverage.xml report
                     sh 'python3 -m coverage xml'
                 }
-            }
-        }
-        stage('Test') {
-            steps {
-                echo "Testing..${env.BUILD_ID} on ${env.BUILD_URL}"
             }
         }
         stage('SonarQube analysis') {
@@ -57,11 +52,12 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                 }
             }
-        }        
+        }
         stage('Deploy') {
             steps {
                 echo "Deploying....${env.BUILD_ID} on ${env.BUILD_URL}"
             }
         }
+        
     }
 }
