@@ -44,7 +44,7 @@ pipeline {
                 }
             }
         }
-        stage("Quality Gate") {
+        stage('Quality Gate') {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
                     // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
@@ -53,11 +53,11 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('docker packaging') {
             steps {
-                echo "Deploying....${env.BUILD_ID} on ${env.BUILD_URL}"
+                echo 'docker packaging...'
+                sh 'docker build --version'
             }
         }
-        
     }
 }
