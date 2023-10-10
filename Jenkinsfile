@@ -16,7 +16,14 @@ pipeline {
         }
         stage('install Python package') {
             steps {
+                echo 'install required packages...'
                 sh 'pip3 install -r requirements.txt'
+                
+                echo 'run books_cbv test...'
+                sh 'python3 manage.py test books_cbv'
+                
+                //echo 'run coverage & report...'
+                
             }
         }
         stage('Test') {
