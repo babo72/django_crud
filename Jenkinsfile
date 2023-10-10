@@ -19,7 +19,7 @@ pipeline {
                 echo "Testing..${env.BUILD_ID} on ${env.BUILD_URL}"
             }
         }
-        stage('analysis') {
+        stage('SonarQube analysis') {
             steps {
                 script {
                     scannerHome = tool 'Sonar-Scanner'
@@ -29,6 +29,15 @@ pipeline {
                 }
             }
         }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }        
         stage('Deploy') {
             steps {
                 echo "Deploying....${env.BUILD_ID} on ${env.BUILD_URL}"
