@@ -36,7 +36,7 @@ CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 ##########################################################################
 
 # to build this image
-# $ docker build --file Dockerfile_4Django -t babo72/django-crud:latest .
+# $ docker build --file docker/Dockerfile -t babo72/django-crud:latest .
 
 # run image
 # $ docker run -d --name django-crud-1 -p 8000:8000 babo72/django-crud
