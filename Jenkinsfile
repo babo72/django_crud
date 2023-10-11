@@ -56,7 +56,7 @@ pipeline {
         stage('docker packaging') {
             steps {
                 echo 'docker packaging...'
-                sh 'docker build --help'
+                sh 'docker build --file docker/Dockerfile -t babo72/django-crud:latest .'
             }
         }
     }
