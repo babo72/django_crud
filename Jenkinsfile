@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    parameters {
+        booleanParam(name: 'skip_sonar', defaultValue: true, description: 'Set to true to skip the SonarQube&Quality stage')
+    }
+    
     stages {
         stage('checkout') {
             steps {
@@ -35,6 +38,7 @@ pipeline {
             }
         }
         stage('SonarQube analysis') {
+            when { expression { params.skip_sonar != true } }
             steps {
                 script {
                     scannerHome = tool 'Sonar-Scanner'
@@ -45,6 +49,7 @@ pipeline {
             }
         }
         stage('Quality Gate') {
+            when { expression { params.skip_sonar != true } }
             steps {
                 timeout(time: 1, unit: 'HOURS') {
                     // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
